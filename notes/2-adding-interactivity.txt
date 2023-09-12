@@ -1,6 +1,7 @@
 ADDING INTERACTIVITY
 
 1 - Responding to Events
+2 - Sate: A component's Memory
 
 
 
@@ -52,12 +53,39 @@ Event handlers (functions that are called in response to interactions like click
     - Stopping propagation
         - use e.stopPropagation()
 
+
 1.4 - Preventing default behavior
 
     - call e.preventDefault()
 
-1.6 - Event handlers are impure
+
+1.5 - Event handlers are impure
 
     - event handlers unlike React components are best place to have side effects.
     - in actuality, these functions (event handlers) are used to change things in response to user interactions. Hence, they can have side effects.
     - they need not be pure
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+2 - Sate: A component's Memory
+
+2.1 - What is state?
+
+    - React offers many features to components so that they can retain data, react to user interactions and many others. 
+    - "State" is a react feature that allows a component to have memory, thus enabling them to maintain and manage data internally.
+
+2.2 - Intro to Hooks
+ 
+    - Hooks are functions in react, that allow functional components (not class components) to use other React features like state, effect and other React functionalities.
+    - Hooks are "special features" in React that allow to "hook into" other React features.
+    - Start with the term "use". e.g. useState() or useEffect()
+
+2.3 - useState()
+
+    useState() is a React hook that allows to use state in functional component.
+
+    - Significance
+        
+    - Syntax
+    - Characteristics
