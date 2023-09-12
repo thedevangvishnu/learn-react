@@ -1,0 +1,150 @@
+DESCRIBING THE UI
+
+1 - First component
+2 - Importing and exporting components
+3 - Writing markup with JSX
+4 - Passing props to a component
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1 - First component
+
+1.1 - What is a component?
+
+- Components are the reusable building block of UI.
+- React components are JS functions that return markup.
+
+1.2 - JSX overview
+
+- JavaScript XML
+- React uses JSX to define components. 
+- It is just js containing html like markup inside it.
+
+1.3 - Rules for creating components
+
+- Function whose name must start with a capital letter.
+- Should return only one JSX tag.
+- If return statements are in the next line as the return keyword, use () to wrap the JSX element.
+
+1.4 - Nesting components
+
+React components can be nested. One component can be nested and reused again and again inside another component. 
+
+e.g. - 
+
+<Gallery  (parent component)
+  <Profile /> (child component)
+  <Profile />
+  <Profile />
+/>
+
+Note: Never define child components inside parent component as they make program super slow and cause bugs. Define them somewhere else and then just use them inside the parent component. 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+2 - Importing and Exporting components
+
+2.1 - Default import-export
+
+These components use "export default" keyword.
+e.g. - export default function Gallery() {}
+
+To import using default, "import" keyword is used, followed by any Name + "from" keyword + file path
+e.g. - import Gallery from "./abc/def/gallery.js"
+
+Note: Any name can be used instead of Gallery while importing. Just use the same name as component.
+e.g. - import Monkey from "./abc/def/gallery.js" would still import the gallery component but now we have to use Monkey name for it in our App.
+
+2.2 - Named import-export
+
+These components use just "export" keyword.
+e.g. - export function Profile() {}
+
+To import using name, "import" keyword is used + { same Name } + "from" keyword + file path
+e.g. - import { Profile } from "./abc/def/profile.js"
+
+2.3 - Important rules for imports-exports
+
+- Only one default export per file.
+- Multiple named exports are allowed.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+5 - Passing props to a component
+
+5.1 - What are props?
+
+- Props are mechanisms that allow React components to communicate with each other.
+- Props are properties (similar to HTML attributes) that allow parent components to pass data to the child components.
+
+5.2 - Passing props to child component inside a parent component
+
+- In order to use props, create any prop using a string name and assign any value (just like default HTML attributes) to a valid JSX or any custom tag of the parent component:
+  - syntax: propName={value} --> livesIn={"Patna"}
+  - Prop values should be rapped in {}
+
+5.3 - Reading props inside the child component
+
+- In order to read props, pass all the props to child component:
+  - Any identifier/string can be used to pass props.
+  - Object destructuring syntax can be used to directly pass all props as arguments to the child component.
+  - Default values can also be added to props which will be used if prop values are missing or are undefined in the parent component.
+  - Spread operators allow to pass all props, without repetition.
+
+5.4 - Children prop
+
+"children" is a special prop that is used in case of nested JSx
+  - when you nest content inside a jsx tag, the parent component will receive a special prop called "children" whose value is set to the nested content/component. 
+  - "children" is like a keyword here.
+
+5.5 - Immutable
+
+- Props are immutable (unchangeable):
+  - Read only snapshots in time that can can never change directly.
+  - Use state for interactivity.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+6 - Conditional rendering
+
+In react, we control branching logic with JS. We can return different JSX depending upon conditions.
+
+6.1 - Using "if" control statements to check condition and then returning jsx
+
+6.2 - Using ternary operators inside JSX/return statements of a component
+
+6.3 - Using "if" control statements to check condition and save jsx in a new variable and then return this new variable using {}
+
+6.4 - Using shorthands
+
+  - && and || operators are used for shorthand evaluation 
+  - condition && <Component /> means....if condition is true, then return Component or else nothing.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+7 - Rendering Lists 
+
+7.1 - Generating instances of a component using data from an array/object
+
+  - js map() method is used to generate instances of similar component.
+  - js filter() method id used to generate instances of a similar component that fulfil a particular condition.
+
+7.2 - Key
+
+  - each instance of a react component that iterates over array items must contain a unique key.  
+  - better to use ids/strings for keys rather than generating keys on the fly with Math.random() or something else.
+  - keys are necessary for react to keep in check for what's happening. Unique keys allow react to track which items were modified, inserted or deleted. 
+  - avoid using array index as keys because an index associated with a particular item in the array changes immediately as soon as the array is modified. React wouldn't be able to keep track.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+8 - Keeping components pure
+
+- Functional purity
+- What are pure components
+- Side effects in components
+- How to make components pure?
+- React strict mode

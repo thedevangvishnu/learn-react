@@ -1,0 +1,63 @@
+ADDING INTERACTIVITY
+
+1 - Responding to Events
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1 - Responding to Events
+
+Event handlers (functions that are called in response to interactions like clicking, typing, scrolling, etc.) can be added to jsx to add interactivity.
+
+1.1 - Adding event handlers to components
+
+    - pass the event handler as a prop to the appropriate jsx
+    - name of event handlers tends to start with "handle + event name". 
+        - e.g. onClick = {handleClick}
+    - there is major difference between passing functions and calling them when event handlers are passed as props to a jsx tag or a component.
+        - passing: function is called only when the event fires
+            - e.g. onClick={handleClick} OR onClick={() => alert("hello")}
+        - calling: function is called as soon as the component renders
+            - e.g. onClick={handleClick()} OR onClick={alert("hello")}.
+    - can be defined separately or inline.
+    - custom names can also be given to event handlers to your components but the lowest level jsx tag must use only built-in-browser event names.
+        - e.g. 
+            <Button onSmash ={} /> is correct
+            <button onSmash ={}></button> is wrong
+            <button onClick ={}></button> is correct
+
+
+1.2 - Event handlers and props
+
+    - Passing props to event handlers
+        - props declared inside parent component can be read/passed to event handlers (because event handlers are also defined inside the component) just like they are read inside child component.
+        - e.g: 
+            
+
+    - Passing event handlers as props
+        - event handlers that are defined in parent components can be passed as props to child components. 
+        
+
+1.3 - Event propagation
+
+    Some event handlers are attached to jsx tags which have more tag above them (their parent and/or grandparent divs and so on). In such cases, by default, the event bubbles or propagates up the tree. Starting from inside, the event will fire up, calling the handler associated with it up the the tree, doing the same for tags above it, in "inside-out" manner.
+
+    - Adding propagation 
+        - automatic in React and conventional JS. 
+        - events triggered inside parent and/grandparent tags/components will fire all the event handlers associated. 
+
+    - Stopping propagation
+        - use e.stopPropagation()
+
+1.4 - Preventing default behavior
+
+    - call e.preventDefault()
+
+1.6 - Event handlers are impure
+
+    - event handlers unlike React components are best place to have side effects.
+    - in actuality, these functions (event handlers) are used to change things in response to user interactions. Hence, they can have side effects.
+    - they need not be pure
