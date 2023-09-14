@@ -72,7 +72,7 @@ Event handlers (functions that are called in response to interactions like click
 
 2.1 - What is state?
 
-    - React offers many features to components so that they can retain data, react to user interactions and many others. 
+    - React offers many features to components so that they can retain data, react to user interactions and so on. 
     - "State" is a react feature that allows a component to have memory, thus enabling them to maintain and manage data internally.
 
 2.2 - Intro to Hooks
@@ -86,6 +86,19 @@ Event handlers (functions that are called in response to interactions like click
     useState() is a React hook that allows to use state in functional component.
 
     - Significance
-        
+        - local variables that are used inside components to store data do not re-render the component. Any changes to the values of these local variables are not sufficient in making the component store that changed data.  
+        - useState() allows components to store and manage data.
+        - data stored using useState() lets components re-render while retaining the stored data between re-renders.
+         
     - Syntax
+        - const [variable, setVariable] = useState()
+        - useState() is called and stored in an array which always returns two items: 
+            - state variable: value that you want to store, retain and update between re-renders.
+            - state setter function: function that updates state variable between re-renders.
+
     - Characteristics
+        - allows to re-render components.
+        - always returns an array with two items.
+        - argument to useState() becomes the value for the state variable.
+        - cannot be declared and called conditionally.
+        - must be stated at the top of the component.
