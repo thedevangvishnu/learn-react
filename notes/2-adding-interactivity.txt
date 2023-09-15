@@ -102,3 +102,55 @@ Event handlers (functions that are called in response to interactions like click
         - argument to useState() becomes the value for the state variable.
         - cannot be declared and called conditionally.
         - must be stated at the top of the component.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+3 - Renders and commits
+
+Components as chefs in the kitchen and React as the waiter taking orders from the guest (user).
+
+3.1 - What "rendering" means in React?
+
+    - Rendering refers to the process of calling a component in React. 
+    - In more general sense, it refers to the whole process of triggering, calling and updating changes to the DOM. 
+
+3.2 - Steps involved in any screen update in React
+
+    - Triggering a render 
+        - The process is similar waiter brining in the order from the guest.
+        - Triggering renders happens in two scenarios:
+            - Initial renders: When the apps loads for the first time, React triggers the first render by calling th createRoot() with the target DOM node and then calling its "render" method with the specific component.
+            - Re-renders when states update: React triggers re-renders any time a component's (or its ancestor component's) state gets updated.
+
+    - Rendering the component
+        - This process is similar to the chef making the dish
+        - Rendering in real sense, is React calling the component
+        - Rendering also happens in two scenarios:
+            - Initial rendering: Rendering the root component when the app loads (or the root component calls another component)
+            - Re-rendering: Rendering the component whose state has been updated.
+
+    - Committing to the DOM
+        - Changes are committed to the DOM in two scenarios:
+            - Committing Initial render: React uses appendChild() api to update the initial render of a component to the DOM
+            - Committing re-render of state updated components.
+
+3.3 - Important points related to React rendering and DOM updates
+
+        - Process of displaying output to the user after all these three processes is termed as "browser rendering".
+        - React only commits changes to the DOM when there is a difference (a state update) between the current React DOM and the actual DOM.
+        - It doesn't touch the actual DOM if the rendering result is same as the last time.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+4 - State as a snapshot
+
+    - Setting state requests a new render.
+    - Rendering a component (calling the functional component in React) returns the jsx which was stored as a snapshot of UI in that particular time (in that particular render). 
+        - This "snapshot" contains all local variables, event handlers and state variables.
+        - This JSX is "interactive" as it contains logic for what would happen in response to user interactions.
+        - "Event handlers and state variable values are fixed based on the snapshot calculated from the state of that particular render.
+        - These values change once React takes another snapshot, when the state variable updates in new renders.
+    - A state variable's value never changes in the same render. It only updates in the next render (even if it is followed by async code).
+    - Use "substitution method" in code when this concept gets confusing.
