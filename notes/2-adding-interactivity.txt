@@ -137,9 +137,11 @@ Components as chefs in the kitchen and React as the waiter taking orders from th
 
 3.3 - Important points related to React rendering and DOM updates
 
-        - Process of displaying output to the user after all these three processes is termed as "browser rendering".
-        - React only commits changes to the DOM when there is a difference (a state update) between the current React DOM and the actual DOM.
-        - It doesn't touch the actual DOM if the rendering result is same as the last time.
+    - Process of displaying output to the user after all these three processes is termed as "browser rendering".
+    
+    - React only commits changes to the DOM when there is a difference (a state update) between the current React DOM and the actual DOM.
+    
+    - It doesn't touch the actual DOM if the rendering result is same as the last time.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -147,10 +149,71 @@ Components as chefs in the kitchen and React as the waiter taking orders from th
 4 - State as a snapshot
 
     - Setting state requests a new render.
+    
     - Rendering a component (calling the functional component in React) returns the jsx which was stored as a snapshot of UI in that particular time (in that particular render). 
         - This "snapshot" contains all local variables, event handlers and state variables.
         - This JSX is "interactive" as it contains logic for what would happen in response to user interactions.
         - "Event handlers and state variable values are fixed based on the snapshot calculated from the state of that particular render.
         - These values change once React takes another snapshot, when the state variable updates in new renders.
+    
     - A state variable's value never changes in the same render. It only updates in the next render (even if it is followed by async code).
+    
     - Use "substitution method" in code when this concept gets confusing.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+6 - Updating Objects in State 
+
+6.1 - "Immutable" states
+
+    - States in React should be immutable(unchangeable) and "read-only".
+    
+    - If we mutate states (directly change the value in state in stead of replacing with new value), then it doesn't trigger re-render as React would never use the state setter function to update. In stead you would directly change the state variable. 
+    
+    - Also, this makes React slow and buggy because changing state directly would change the "snapshot" of the previous render which would make comparing and committing changes much more difficult and slower.
+    
+    - Primary types in states such as numbers, strings, booleans are treated immutable.
+    
+    - Objects in state are technically mutable, but we should always treat them as immutable.
+
+6.2 - "Mutable" vs "Immutable" objects
+
+    - Directly changing an existing object's properties and values is called as mutation. 
+    
+    - Objects in react state should be immutable. Any update to the state object should be done using the state setter function by creating a clone or a new object and then using this new object to make changes/updates.
+
+6.3 - Updating objects in state
+
+    - Creating new objects
+        - use state setter function to update the state object by creating a new object and updating it.
+    
+    - Spread Syntax
+        - setObject({...oldObj, newProperty: "newValue"}) can also be used to update state objects.
+        - Shallow updating, only copies one level. 
+
+6.4 - Nested objects in states
+
+    - What is "nesting" in reality?
+        - const obj1 = {a: "a", objProp: { b: "b", c: "c",}};
+        - in reality, the above example is
+            - const obj2 = {b: "b", c: "c"}
+            - so, obj1 = {a: "a", objProp: obj2};
+            - it is a wrong mental model to think of nested objects as "objects inside another objects." Nothing is actually inside.
+            - another object (say obj3 or obj4) can also reference obj2 as its objProp value;
+
+    - Updating nested objects 
+        - Nested objects should be updated using from the place of change in "ground-up" fashion updating its all parent objects. 
+        - This can be done using spread operator.
+
+    - Using Immer
+        - Immer is a library that lets us write convenient but mutating syntax that looks like "breaking conventions in React".
+        - It uses "draft" which is a special kind of object called as Proxy, which we can use to mutate that object and make as many updates to it.
+        - Under the hood, it draft keeps count of all out edits and then produces a new object containing all the edits, hence, not changing the main object, and technically not breaking rules in React.
+        - To use Immer:
+            - run npm imstall use-immer to add Immer as a dependency
+            - import { useImmer } from "use-immer".
+
+
+difference between replacing a value and changing a value
